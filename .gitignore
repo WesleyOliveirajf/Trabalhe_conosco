@@ -1,0 +1,30 @@
+# Arquivos de configuração sensíveis
+.env
+
+# Banco de dados local
+candidatos.db
+
+# Dependências
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Arquivos de upload (currículos)
+uploads/
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Arquivos temporários
+*.tmp
+*.temp

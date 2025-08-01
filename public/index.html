@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabalhe na Torp</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Trabalhe na Torp</h1>
+            <p>Envie seu currículo e faça parte da nossa equipe</p>
+        </header>
+
+        <main>
+            <form id="candidaturaForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="nome">Nome *</label>
+                    <input type="text" id="nome" name="nome" required>
+                    <span class="error-message" id="nome-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="sobrenome">Sobrenome *</label>
+                    <input type="text" id="sobrenome" name="sobrenome" required>
+                    <span class="error-message" id="sobrenome-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-mail *</label>
+                    <input type="email" id="email" name="email" required>
+                    <span class="error-message" id="email-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefone">Telefone de Contato *</label>
+                    <input type="tel" id="telefone" name="telefone" placeholder="(XX) XXXXX-XXXX" required>
+                    <span class="error-message" id="telefone-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="pais">País *</label>
+                    <select id="pais" name="pais" required>
+                        <option value="">Selecione seu país</option>
+                        <option value="Brasil">Brasil</option>
+                        <option value="Portugal">Portugal</option>
+                        <option value="Angola">Angola</option>
+                        <option value="Estados Unidos">Estados Unidos</option>
+                    </select>
+                    <span class="error-message" id="pais-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="curriculo">Currículo *</label>
+                    <div class="file-upload-container">
+                        <input type="file" id="curriculo" name="curriculo" accept=".doc,.docx,.pdf,.txt" required>
+                        <div class="file-info">
+                            <p><strong>Tipos permitidos:</strong> .DOC, .DOCX, .PDF, .TXT</p>
+                            <p><strong>Tamanho máximo:</strong> 5 MB</p>
+                        </div>
+                    </div>
+                    <span class="error-message" id="curriculo-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" id="submitBtn">
+                        <span id="submitText">Enviar Currículo</span>
+                        <span id="loadingSpinner" class="spinner" style="display: none;">Enviando...</span>
+                    </button>
+                </div>
+            </form>
+
+            <!-- Mensagens de feedback -->
+            <div id="successMessage" class="message success" style="display: none;">
+                <h3>✅ Sucesso!</h3>
+                <p>Obrigado! Seu currículo foi enviado com sucesso.</p>
+            </div>
+
+            <div id="errorMessage" class="message error" style="display: none;">
+                <h3>❌ Erro</h3>
+                <p id="errorText">Ocorreu um erro ao enviar seu currículo. Por favor, tente novamente mais tarde.</p>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 - Todos os direitos reservados</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
