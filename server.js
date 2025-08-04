@@ -26,6 +26,7 @@ db.run(`CREATE TABLE IF NOT EXISTS candidatos (
   email TEXT NOT NULL,
   telefone TEXT NOT NULL,
   pais TEXT NOT NULL,
+  cargo TEXT,
   curriculo_nome TEXT,
   data_envio DATETIME DEFAULT CURRENT_TIMESTAMP
 )`, (err) => {
@@ -153,6 +154,7 @@ app.get('/admin/candidatos', (req, res) => {
                         <th>E-mail</th>
                         <th>Telefone</th>
                         <th>País</th>
+                        <th>Cargo Pretendido</th>
                         <th>Currículo</th>
                         <th>Data de Envio</th>
                     </tr>
@@ -165,6 +167,7 @@ app.get('/admin/candidatos', (req, res) => {
                         <td><a href="mailto:${row.email}">${row.email}</a></td>
                         <td>${row.telefone}</td>
                         <td>${row.pais}</td>
+                        <td>${row.cargo || '-'}</td>
                         <td>${row.curriculo_nome}</td>
                         <td class="date">${new Date(row.data_envio).toLocaleString('pt-BR')}</td>
                     </tr>
@@ -195,7 +198,7 @@ app.get('/api/candidatos', (req, res) => {
 // Rota para processar o formulário
 app.post('/enviar-candidatura', upload.single('curriculo'), async (req, res) => {
   try {
-    const { nome, sobrenome, email, telefone, pais } = req.body;
+    const { nome, sobrenome, email, telefone, pais, cargo } = req.body;
     const curriculo = req.file;
 
     // Validação dos campos obrigatórios
@@ -209,9 +212,9 @@ app.post('/enviar-candidatura', upload.single('curriculo'), async (req, res) => 
     // Salvar dados no banco de dados
     const candidatoId = await new Promise((resolve, reject) => {
       db.run(
-        `INSERT INTO candidatos (nome, sobrenome, email, telefone, pais, curriculo_nome) 
-         VALUES (?, ?, ?, ?, ?, ?)`,
-        [nome, sobrenome, email, telefone, pais, curriculo.originalname],
+        `INSERT INTO candidatos (nome, sobrenome, email, telefone, pais, cargo, curriculo_nome) 
+         VALUES (?, ?, ?, ?, ?, ?, ?)`,
+        [nome, sobrenome, email, telefone, pais, cargo || '', curriculo.originalname],
         function(err) {
           if (err) {
             console.error('Erro ao salvar candidato no banco:', err.message);
@@ -237,6 +240,7 @@ app.post('/enviar-candidatura', upload.single('curriculo'), async (req, res) => 
         <p><strong>E-mail:</strong> ${email}</p>
         <p><strong>Telefone:</strong> ${telefone}</p>
         <p><strong>País:</strong> ${pais}</p>
+        ${cargo ? `<p><strong>Cargo Pretendido:</strong> ${cargo}</p>` : ''}
         <br>
         <p>O currículo do candidato está anexado a este e-mail.</p>
         <p><em>Dados salvos automaticamente no sistema.</em></p>

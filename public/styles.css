@@ -14,12 +14,24 @@ body {
 }
 
 .container {
-    max-width: 600px;
+    max-width: 800px;
     margin: 0 auto;
     background: white;
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     overflow: hidden;
+}
+
+.form-container {
+    width: 800px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 32px 32px 24px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
 }
 
 header {
@@ -33,6 +45,8 @@ header h1 {
     font-size: 2.5rem;
     margin-bottom: 10px;
     font-weight: 300;
+    text-align: center;
+    width: 100%;
 }
 
 header p {
@@ -301,3 +315,2428 @@ input[type="file"]::-webkit-file-upload-button {
 input[type="file"]::-webkit-file-upload-button:hover {
     opacity: 0.9;
 }
+
+.checkbox-block {
+    width: 100%;
+    max-width: none;
+    margin: 18px 0 0 0;
+    padding: 0;
+    background: none;
+    border-radius: 0;
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+}
+
+.header-flex {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+.logo-torp {
+    height: 60px;
+    width: auto;
+    max-width: 200px;
+    object-fit: contain;
+    margin-right: 32px;
+    filter: none;
+}
+.header-flex h1 {
+    font-size: 2.8rem;
+    font-weight: 600;
+    margin: 0;
+    color: #fff;
+}
+/* Estilos para redes sociais */
+.social-links {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.social-links p {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.social-icon:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+.social-icon.instagram {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+.social-icon.linkedin {
+    background: #0077b5;
+}
+
+.social-icon.instagram:hover {
+    background: linear-gradient(45deg, #e6883c 0%, #d55a35 25%, #c91e3c 50%, #b91e5f 75%, #a91581 100%);
+}
+
+.social-icon.linkedin:hover {
+    background: #005885;
+}
+
+@media (max-width: 600px) {
+    .social-icons {
+        gap: 12px;
+    }
+    
+    .social-icon {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+        margin-right: 0;
+    }
+    .header-flex h1 {
+        font-size: 1.5rem;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logo-torp {
+        height: 40px;
+        max-width: 120px;
+    }
+}
+@media (max-width: 600px) {
+    .

@@ -42,7 +42,7 @@ No arquivo `server.js`, linha 56, substitua:
 ```javascript
 auth: {
   user: 'dtitorp@gmail.com', // E-mail real criado
-  pass: 'torp@2021' // Senha de app copiada (sem espaços)
+  pass: 'abcd efgh ijkl mnop' // Senha de app copiada (sem espaços)
 }
 ```
 

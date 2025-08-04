@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const emailInput = document.getElementById('email');
     const telefoneInput = document.getElementById('telefone');
     const paisSelect = document.getElementById('pais');
+    const cargoInput = document.getElementById('cargo');
     const curriculoInput = document.getElementById('curriculo');
 
     // Máscara para telefone brasileiro
@@ -113,6 +114,11 @@ document.addEventListener('DOMContentLoaded', function() {
             return { isValid: true };
         },
         
+        cargo: (value) => {
+            // Campo opcional - sempre válido
+            return { isValid: true };
+        },
+        
         curriculo: (file) => {
             if (!file) {
                 return { isValid: false, message: 'Por favor, selecione um arquivo de currículo.' };
@@ -141,6 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
     validateField(emailInput, 'email-error', validators.email);
     validateField(telefoneInput, 'telefone-error', validators.telefone);
     validateField(paisSelect, 'pais-error', validators.pais);
+    validateField(cargoInput, 'cargo-error', validators.cargo);
 
     // Validação especial para arquivo
     curriculoInput.addEventListener('change', function() {
@@ -166,7 +173,8 @@ document.addEventListener('DOMContentLoaded', function() {
             { element: sobrenomeInput, validator: validators.sobrenome, errorId: 'sobrenome-error' },
             { element: emailInput, validator: validators.email, errorId: 'email-error' },
             { element: telefoneInput, validator: validators.telefone, errorId: 'telefone-error' },
-            { element: paisSelect, validator: validators.pais, errorId: 'pais-error' }
+            { element: paisSelect, validator: validators.pais, errorId: 'pais-error' },
+            { element: cargoInput, validator: validators.cargo, errorId: 'cargo-error' }
         ];
 
         fields.forEach(field => {
@@ -257,6 +265,7 @@ document.addEventListener('DOMContentLoaded', function() {
             formData.append('email', emailInput.value.trim());
             formData.append('telefone', telefoneInput.value.trim());
             formData.append('pais', paisSelect.value);
+            formData.append('cargo', cargoInput.value.trim());
             formData.append('curriculo', curriculoInput.files[0]);
 
             // Enviar dados
