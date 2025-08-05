@@ -3,39 +3,147 @@ const multer = require('multer');
 const nodemailer = require('nodemailer');
 const path = require('path');
 const fs = require('fs');
+const { Pool } = require('pg');
 const sqlite3 = require('sqlite3').verbose();
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Configuração do banco de dados SQLite
-const db = new sqlite3.Database('./candidatos.db', (err) => {
-  if (err) {
-    console.error('Erro ao conectar com o banco de dados:', err.message);
-  } else {
-    console.log('✅ Conectado ao banco de dados SQLite.');
-  }
-});
+// Configuração do banco de dados com fallback
+let usePostgreSQL = false;
+let pool = null;
+let db = null;
 
-// Criar tabela de candidatos se não existir
-db.run(`CREATE TABLE IF NOT EXISTS candidatos (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  nome TEXT NOT NULL,
-  sobrenome TEXT NOT NULL,
-  email TEXT NOT NULL,
-  telefone TEXT NOT NULL,
-  pais TEXT NOT NULL,
-  cargo TEXT,
-  curriculo_nome TEXT,
-  data_envio DATETIME DEFAULT CURRENT_TIMESTAMP
-)`, (err) => {
-  if (err) {
-    console.error('Erro ao criar tabela:', err.message);
+// Tentar conectar ao PostgreSQL primeiro
+if (process.env.DB_HOST && process.env.DB_USER && process.env.DB_PASS) {
+  pool = new Pool({
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT || 5432,
+    database: process.env.DB_NAME || 'candidatos_db',
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+  });
+
+  // Testar conexão PostgreSQL
+  pool.connect((err, client, release) => {
+    if (err) {
+      console.log('⚠️ PostgreSQL não disponível, usando SQLite como fallback');
+      console.log('💡 Para usar PostgreSQL, configure as variáveis no .env e instale o PostgreSQL');
+      initSQLite();
+    } else {
+      console.log('✅ Conectado ao banco de dados PostgreSQL.');
+      usePostgreSQL = true;
+      release();
+      initPostgreSQLTable();
+    }
+  });
+} else {
+  console.log('📝 Configurações PostgreSQL não encontradas, usando SQLite');
+  initSQLite();
+}
+
+// Função para inicializar SQLite
+function initSQLite() {
+  db = new sqlite3.Database('./candidatos.db', (err) => {
+    if (err) {
+      console.error('Erro ao conectar com SQLite:', err.message);
+    } else {
+      console.log('✅ Conectado ao banco de dados SQLite.');
+      initSQLiteTable();
+    }
+  });
+}
+
+// Função para criar tabela PostgreSQL
+function initPostgreSQLTable() {
+  pool.query(`CREATE TABLE IF NOT EXISTS candidatos (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    sobrenome VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    telefone VARCHAR(50) NOT NULL,
+    pais VARCHAR(100) NOT NULL,
+    cargo VARCHAR(255),
+    alertas VARCHAR(10) DEFAULT 'nao',
+    curriculo_nome VARCHAR(255),
+    data_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  )`, (err) => {
+    if (err) {
+      console.error('Erro ao criar tabela PostgreSQL:', err.message);
+    } else {
+      console.log('✅ Tabela PostgreSQL de candidatos pronta.');
+    }
+  });
+}
+
+// Função para criar tabela SQLite
+function initSQLiteTable() {
+  db.run(`CREATE TABLE IF NOT EXISTS candidatos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome TEXT NOT NULL,
+    sobrenome TEXT NOT NULL,
+    email TEXT NOT NULL,
+    telefone TEXT NOT NULL,
+    pais TEXT NOT NULL,
+    cargo TEXT,
+    alertas TEXT DEFAULT 'nao',
+    curriculo_nome TEXT,
+    data_envio DATETIME DEFAULT CURRENT_TIMESTAMP
+  )`, (err) => {
+    if (err) {
+      console.error('Erro ao criar tabela SQLite:', err.message);
+    } else {
+      console.log('✅ Tabela SQLite de candidatos pronta.');
+    }
+  });
+}
+
+// Função para executar queries de forma unificada
+async function executeQuery(query, params = []) {
+  if (usePostgreSQL) {
+    const result = await pool.query(query, params);
+    return result.rows;
   } else {
-    console.log('✅ Tabela de candidatos pronta.');
+    return new Promise((resolve, reject) => {
+      if (query.includes('SELECT')) {
+        db.all(query, params, (err, rows) => {
+          if (err) reject(err);
+          else resolve(rows);
+        });
+      } else {
+        db.run(query, params, function(err) {
+          if (err) reject(err);
+          else resolve({ id: this.lastID, changes: this.changes });
+        });
+      }
+    });
   }
-});
+}
+
+// Função para inserir candidato
+async function insertCandidate(nome, sobrenome, email, telefone, pais, cargo, alertas, curriculo_nome) {
+  if (usePostgreSQL) {
+    const result = await pool.query(
+      `INSERT INTO candidatos (nome, sobrenome, email, telefone, pais, cargo, alertas, curriculo_nome) 
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id`,
+      [nome, sobrenome, email, telefone, pais, cargo || '', alertas || 'nao', curriculo_nome]
+    );
+    return result.rows[0].id;
+  } else {
+    return new Promise((resolve, reject) => {
+      db.run(
+        `INSERT INTO candidatos (nome, sobrenome, email, telefone, pais, cargo, alertas, curriculo_nome) 
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+        [nome, sobrenome, email, telefone, pais, cargo || '', alertas || 'nao', curriculo_nome],
+        function(err) {
+          if (err) reject(err);
+          else resolve(this.lastID);
+        }
+      );
+    });
+  }
+}
 
 // Middleware
 app.use(express.static('public'));
@@ -91,18 +199,42 @@ const transporter = nodemailer.createTransport({
   // Consulte CONFIGURACAO_EMAIL.md para mais detalhes
 });
 
+// Middleware de autenticação básica para rotas admin
+const basicAuth = (req, res, next) => {
+  const auth = req.headers.authorization;
+  
+  if (!auth || !auth.startsWith('Basic ')) {
+    res.setHeader('WWW-Authenticate', 'Basic realm="Admin Area"');
+    return res.status(401).send('Acesso negado. Autenticação necessária.');
+  }
+  
+  const credentials = Buffer.from(auth.slice(6), 'base64').toString().split(':');
+  const username = credentials[0];
+  const password = credentials[1];
+  
+  const adminUser = process.env.ADMIN_USER || 'admin';
+  const adminPass = process.env.ADMIN_PASS || 'admin';
+  
+  if (username === adminUser && password === adminPass) {
+    next();
+  } else {
+    res.setHeader('WWW-Authenticate', 'Basic realm="Admin Area"');
+    return res.status(401).send('Credenciais inválidas.');
+  }
+};
+
 // Rota principal
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Rota para visualizar candidatos (painel administrativo)
-app.get('/admin/candidatos', (req, res) => {
-  db.all('SELECT * FROM candidatos ORDER BY data_envio DESC', [], (err, rows) => {
-    if (err) {
-      console.error('Erro ao buscar candidatos:', err.message);
-      return res.status(500).json({ error: 'Erro ao buscar candidatos' });
-    }
+app.get('/admin/candidatos', basicAuth, async (req, res) => {
+  try {
+    const query = usePostgreSQL ? 
+      'SELECT * FROM candidatos ORDER BY data_envio DESC' :
+      'SELECT * FROM candidatos ORDER BY data_envio DESC';
+    const rows = await executeQuery(query);
     
     // Gerar HTML para visualização
     const html = `
@@ -125,6 +257,11 @@ app.get('/admin/candidatos', (req, res) => {
             th { background-color: #f8f9fa; font-weight: bold; }
             tr:hover { background-color: #f5f5f5; }
             .id-badge { background: #007bff; color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8em; }
+            .alert-badge { padding: 4px 8px; border-radius: 4px; font-size: 0.8em; font-weight: bold; }
+            .alert-yes { background: #28a745; color: white; }
+            .alert-no { background: #dc3545; color: white; }
+            .email-alert-enabled { background: linear-gradient(135deg, #e3f2fd, #bbdefb); padding: 6px 10px; border-radius: 6px; border: 2px solid #2196f3; font-weight: bold; color: #1565c0; text-decoration: none; }
+            .email-alert-enabled:hover { background: linear-gradient(135deg, #bbdefb, #90caf9); }
             .country-flag { font-size: 1.2em; margin-right: 5px; }
             .date { color: #666; font-size: 0.9em; }
             .no-data { text-align: center; color: #666; padding: 40px; }
@@ -143,6 +280,10 @@ app.get('/admin/candidatos', (req, res) => {
                     <div class="stat-number">${rows.filter(r => r.data_envio.includes(new Date().toISOString().split('T')[0])).length}</div>
                     <div class="stat-label">Hoje</div>
                 </div>
+                <div class="stat-card" style="background: #28a745;">
+                    <div class="stat-number">${rows.filter(r => r.alertas === 'sim').length}</div>
+                    <div class="stat-label">📧 Aceitam Alertas</div>
+                </div>
             </div>
             
             ${rows.length > 0 ? `
@@ -155,6 +296,7 @@ app.get('/admin/candidatos', (req, res) => {
                         <th>Telefone</th>
                         <th>País</th>
                         <th>Cargo Pretendido</th>
+                        <th>Alertas</th>
                         <th>Currículo</th>
                         <th>Data de Envio</th>
                     </tr>
@@ -164,10 +306,11 @@ app.get('/admin/candidatos', (req, res) => {
                     <tr>
                         <td><span class="id-badge">#${row.id}</span></td>
                         <td><strong>${row.nome} ${row.sobrenome}</strong></td>
-                        <td><a href="mailto:${row.email}">${row.email}</a></td>
+                        <td><a href="mailto:${row.email}" class="${row.alertas === 'sim' ? 'email-alert-enabled' : ''}">${row.alertas === 'sim' ? '📧 ' : ''}${row.email}</a></td>
                         <td>${row.telefone}</td>
                         <td>${row.pais}</td>
                         <td>${row.cargo || '-'}</td>
+                        <td><span class="alert-badge ${row.alertas === 'sim' ? 'alert-yes' : 'alert-no'}">${row.alertas === 'sim' ? '✓ Sim' : '✗ Não'}</span></td>
                         <td>${row.curriculo_nome}</td>
                         <td class="date">${new Date(row.data_envio).toLocaleString('pt-BR')}</td>
                     </tr>
@@ -181,24 +324,30 @@ app.get('/admin/candidatos', (req, res) => {
     `;
     
     res.send(html);
-  });
+  } catch (err) {
+    console.error('Erro ao buscar candidatos:', err.message);
+    return res.status(500).send('Erro ao buscar candidatos');
+  }
 });
 
 // Rota para buscar candidatos em JSON (API)
-app.get('/api/candidatos', (req, res) => {
-  db.all('SELECT * FROM candidatos ORDER BY data_envio DESC', [], (err, rows) => {
-    if (err) {
-      console.error('Erro ao buscar candidatos:', err.message);
-      return res.status(500).json({ error: 'Erro ao buscar candidatos' });
-    }
+app.get('/api/candidatos', basicAuth, async (req, res) => {
+  try {
+    const query = usePostgreSQL ? 
+      'SELECT * FROM candidatos ORDER BY data_envio DESC' :
+      'SELECT * FROM candidatos ORDER BY data_envio DESC';
+    const rows = await executeQuery(query);
     res.json({ candidatos: rows, total: rows.length });
-  });
+  } catch (err) {
+    console.error('Erro ao buscar candidatos:', err.message);
+    return res.status(500).json({ error: 'Erro ao buscar candidatos' });
+  }
 });
 
 // Rota para processar o formulário
 app.post('/enviar-candidatura', upload.single('curriculo'), async (req, res) => {
   try {
-    const { nome, sobrenome, email, telefone, pais, cargo } = req.body;
+    const { nome, sobrenome, email, telefone, pais, cargo, alertas } = req.body;
     const curriculo = req.file;
 
     // Validação dos campos obrigatórios
@@ -209,23 +358,11 @@ app.post('/enviar-candidatura', upload.single('curriculo'), async (req, res) => 
       });
     }
 
-    // Salvar dados no banco de dados
-    const candidatoId = await new Promise((resolve, reject) => {
-      db.run(
-        `INSERT INTO candidatos (nome, sobrenome, email, telefone, pais, cargo, curriculo_nome) 
-         VALUES (?, ?, ?, ?, ?, ?, ?)`,
-        [nome, sobrenome, email, telefone, pais, cargo || '', curriculo.originalname],
-        function(err) {
-          if (err) {
-            console.error('Erro ao salvar candidato no banco:', err.message);
-            reject(err);
-          } else {
-            console.log(`✅ Candidato salvo no banco com ID: ${this.lastID}`);
-            resolve(this.lastID);
-          }
-        }
-      );
-    });
+    // Salvar no banco de dados
+    const candidatoId = await insertCandidate(
+      nome, sobrenome, email, telefone, pais, cargo, alertas, curriculo.originalname
+    );
+    console.log(`✅ Candidato salvo no banco com ID: ${candidatoId}`);
 
     // Configuração do e-mail
     const mailOptions = {

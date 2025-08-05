@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const paisSelect = document.getElementById('pais');
     const cargoInput = document.getElementById('cargo');
     const curriculoInput = document.getElementById('curriculo');
+    const alertasCheckbox = document.getElementById('alertas');
 
     // Máscara para telefone brasileiro
     telefoneInput.addEventListener('input', function(e) {
@@ -266,6 +267,7 @@ document.addEventListener('DOMContentLoaded', function() {
             formData.append('telefone', telefoneInput.value.trim());
             formData.append('pais', paisSelect.value);
             formData.append('cargo', cargoInput.value.trim());
+            formData.append('alertas', alertasCheckbox.checked ? 'sim' : 'nao');
             formData.append('curriculo', curriculoInput.files[0]);
 
             // Enviar dados
