@@ -1,4 +1,4 @@
-# 🐘 Acessando o Banco de Dados PostgreSQL
+dep# 🐘 Acessando o Banco de Dados PostgreSQL
 
 Este documento descreve como acessar o banco de dados PostgreSQL configurado para este projeto usando as ferramentas **pgAdmin** (que geralmente é instalado com o PostgreSQL) ou **DBeaver** (uma ferramenta de banco de dados universal).
 

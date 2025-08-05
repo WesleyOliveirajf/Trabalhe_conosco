@@ -10,13 +10,18 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Configuração do banco de dados com fallback
-let usePostgreSQL = false;
-let pool = null;
-let db = null;
+// --- Configuração do Banco de Dados Simplificada ---
+let pool;
 
-// Tentar conectar ao PostgreSQL primeiro
-if (process.env.DB_HOST && process.env.DB_USER && process.env.DB_PASS) {
+// Prioriza a URL de conexão do Vercel/Heroku, senão usa as variáveis locais
+if (process.env.POSTGRES_URL) {
+  pool = new Pool({
+    connectionString: process.env.POSTGRES_URL,
+    ssl: {
+      rejectUnauthorized: false
+    }
+  });
+} else if (process.env.DB_HOST) {
   pool = new Pool({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT || 5432,
@@ -24,38 +29,24 @@ if (process.env.DB_HOST && process.env.DB_USER && process.env.DB_PASS) {
     user: process.env.DB_USER,
     password: process.env.DB_PASS,
   });
-
-  // Testar conexão PostgreSQL
-  pool.connect((err, client, release) => {
-    if (err) {
-      console.log('⚠️ PostgreSQL não disponível, usando SQLite como fallback');
-      console.log('💡 Para usar PostgreSQL, configure as variáveis no .env e instale o PostgreSQL');
-      initSQLite();
-    } else {
-      console.log('✅ Conectado ao banco de dados PostgreSQL.');
-      usePostgreSQL = true;
-      release();
-      initPostgreSQLTable();
-    }
-  });
 } else {
-  console.log('📝 Configurações PostgreSQL não encontradas, usando SQLite');
-  initSQLite();
+  console.error('FATAL: As variáveis de ambiente do banco de dados não foram configuradas.');
+  console.error('Defina POSTGRES_URL (para Vercel) ou DB_HOST, DB_USER, etc. (para local).');
+  process.exit(1); // Encerra a aplicação se não houver configuração de BD
 }
 
-// Função para inicializar SQLite
-function initSQLite() {
-  db = new sqlite3.Database('./candidatos.db', (err) => {
-    if (err) {
-      console.error('Erro ao conectar com SQLite:', err.message);
-    } else {
-      console.log('✅ Conectado ao banco de dados SQLite.');
-      initSQLiteTable();
-    }
-  });
-}
+// Testar conexão e criar tabela
+pool.connect((err, client, release) => {
+  if (err) {
+    console.error('❌ Erro ao conectar ao PostgreSQL:', err.stack);
+    return;
+  }
+  console.log('✅ Conectado ao banco de dados PostgreSQL.');
+  release();
+  initPostgreSQLTable();
+});
 
-// Função para criar tabela PostgreSQL
+// Função para criar tabela PostgreSQL (sem alterações)
 function initPostgreSQLTable() {
   pool.query(`CREATE TABLE IF NOT EXISTS candidatos (
     id SERIAL PRIMARY KEY,
@@ -77,72 +68,20 @@ function initPostgreSQLTable() {
   });
 }
 
-// Função para criar tabela SQLite
-function initSQLiteTable() {
-  db.run(`CREATE TABLE IF NOT EXISTS candidatos (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nome TEXT NOT NULL,
-    sobrenome TEXT NOT NULL,
-    email TEXT NOT NULL,
-    telefone TEXT NOT NULL,
-    pais TEXT NOT NULL,
-    cargo TEXT,
-    alertas TEXT DEFAULT 'nao',
-    curriculo_nome TEXT,
-    data_envio DATETIME DEFAULT CURRENT_TIMESTAMP
-  )`, (err) => {
-    if (err) {
-      console.error('Erro ao criar tabela SQLite:', err.message);
-    } else {
-      console.log('✅ Tabela SQLite de candidatos pronta.');
-    }
-  });
-}
-
-// Função para executar queries de forma unificada
+// Função para executar queries
 async function executeQuery(query, params = []) {
-  if (usePostgreSQL) {
-    const result = await pool.query(query, params);
-    return result.rows;
-  } else {
-    return new Promise((resolve, reject) => {
-      if (query.includes('SELECT')) {
-        db.all(query, params, (err, rows) => {
-          if (err) reject(err);
-          else resolve(rows);
-        });
-      } else {
-        db.run(query, params, function(err) {
-          if (err) reject(err);
-          else resolve({ id: this.lastID, changes: this.changes });
-        });
-      }
-    });
-  }
+  const result = await pool.query(query, params);
+  return result.rows;
 }
 
 // Função para inserir candidato
 async function insertCandidate(nome, sobrenome, email, telefone, pais, cargo, alertas, curriculo_nome) {
-  if (usePostgreSQL) {
-    const result = await pool.query(
-      `INSERT INTO candidatos (nome, sobrenome, email, telefone, pais, cargo, alertas, curriculo_nome) 
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id`,
-      [nome, sobrenome, email, telefone, pais, cargo || '', alertas || 'nao', curriculo_nome]
-    );
-    return result.rows[0].id;
-  } else {
-    return new Promise((resolve, reject) => {
-      db.run(
-        `INSERT INTO candidatos (nome, sobrenome, email, telefone, pais, cargo, alertas, curriculo_nome) 
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-        [nome, sobrenome, email, telefone, pais, cargo || '', alertas || 'nao', curriculo_nome],
-        function(err) {
-          if (err) reject(err);
-          else resolve(this.lastID);
-        }
-      );
-    });
-  }
+  const result = await pool.query(
+    `INSERT INTO candidatos (nome, sobrenome, email, telefone, pais, cargo, alertas, curriculo_nome) 
+     VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id`,
+    [nome, sobrenome, email, telefone, pais, cargo || '', alertas || 'nao', curriculo_nome]
+  );
+  return result.rows[0].id;
 }
 
 // Middleware
