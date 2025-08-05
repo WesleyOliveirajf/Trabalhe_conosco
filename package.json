@@ -6,8 +6,7 @@
   "scripts": {
     "start": "node dev-server.js",
     "dev": "nodemon dev-server.js",
-    "vercel:dev": "vercel dev",
-    "build": "vercel build"
+    "vercel:dev": "vercel dev"
   },
   "dependencies": {
     "dotenv": "^17.2.1",
