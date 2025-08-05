@@ -33,7 +33,7 @@ const upload = multer({
 });
 
 // Configuração do Nodemailer
-const transporter = nodemailer.createTransporter({
+const transporter = nodemailer.createTransport({  // ← MUDANÇA AQUI (removido 'r')
   service: 'gmail',
   auth: {
     user: process.env.EMAIL_USER,

@@ -272,7 +272,7 @@ document.addEventListener('DOMContentLoaded', function() {
             formData.append('curriculo', curriculoInput.files[0]);
 
             // Enviar dados
-            const response = await fetch('/enviar-candidatura', {
+            const response = await fetch('/api/submit', {  // ← MUDANÇA AQUI
                 method: 'POST',
                 body: formData
             });
