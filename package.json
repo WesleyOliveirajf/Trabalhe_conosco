@@ -2,10 +2,12 @@
   "name": "trabalhe-conosco",
   "version": "1.0.0",
   "description": "Página de candidatura para vagas de emprego",
-  "main": "server.js",
+  "main": "api/submit.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
+    "start": "node dev-server.js",
+    "dev": "nodemon dev-server.js",
+    "vercel:dev": "vercel dev",
+    "build": "vercel build"
   },
   "dependencies": {
     "dotenv": "^17.2.1",

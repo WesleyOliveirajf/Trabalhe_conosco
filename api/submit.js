@@ -71,29 +71,58 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Método não permitido' });
   }
 
+  console.log('=== INÍCIO DO PROCESSAMENTO ===');
+  console.log('Headers:', req.headers);
+  console.log('Environment variables check:');
+  console.log('- POSTGRES_URL:', process.env.POSTGRES_URL ? 'Configurado' : 'NÃO CONFIGURADO');
+  console.log('- EMAIL_USER:', process.env.EMAIL_USER ? 'Configurado' : 'NÃO CONFIGURADO');
+  console.log('- EMAIL_PASS:', process.env.EMAIL_PASS ? 'Configurado' : 'NÃO CONFIGURADO');
+  console.log('- EMAIL_TO:', process.env.EMAIL_TO ? 'Configurado' : 'NÃO CONFIGURADO');
+
   try {
     // Processar upload do arquivo
+    console.log('Processando upload do arquivo...');
     await runMiddleware(req, res, upload.single('curriculo'));
+    console.log('Upload processado com sucesso');
 
     const { nome, sobrenome, email, telefone, pais, cargo, alertas } = req.body;
     const curriculo = req.file;
 
+    console.log('Dados recebidos:', { nome, sobrenome, email, telefone, pais, cargo, alertas });
+    console.log('Arquivo recebido:', curriculo ? { name: curriculo.originalname, size: curriculo.size } : 'Nenhum arquivo');
+
     // Validações básicas
     if (!nome || !sobrenome || !email || !telefone || !pais || !cargo) {
+      console.log('Erro: Campos obrigatórios não preenchidos');
       return res.status(400).json({ error: 'Todos os campos obrigatórios devem ser preenchidos.' });
     }
 
     if (!curriculo) {
+      console.log('Erro: Currículo não enviado');
       return res.status(400).json({ error: 'Currículo é obrigatório.' });
     }
 
+    // Verificar variáveis de ambiente críticas
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS || !process.env.EMAIL_TO) {
+      console.log('Erro: Variáveis de email não configuradas');
+      return res.status(500).json({ error: 'Configuração de email incompleta. Contate o administrador.' });
+    }
+
+    if (!process.env.POSTGRES_URL) {
+      console.log('Erro: POSTGRES_URL não configurado');
+      return res.status(500).json({ error: 'Configuração de banco de dados incompleta. Contate o administrador.' });
+    }
+
     // Inserir no banco de dados
+    console.log('Inserindo candidato no banco de dados...');
     const candidatoId = await insertCandidate(
       nome, sobrenome, email, telefone, pais, cargo, 
       alertas === 'on', curriculo.originalname
     );
+    console.log('Candidato inserido com ID:', candidatoId);
 
     // Enviar email
+    console.log('Preparando envio de email...');
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_TO,
@@ -114,17 +143,38 @@ export default async function handler(req, res) {
       }]
     };
 
+    console.log('Enviando email para:', process.env.EMAIL_TO);
     await transporter.sendMail(mailOptions);
+    console.log('Email enviado com sucesso!');
 
+    console.log('=== PROCESSAMENTO CONCLUÍDO COM SUCESSO ===');
     res.status(200).json({ 
       success: true, 
       message: 'Candidatura enviada com sucesso!' 
     });
 
   } catch (error) {
-    console.error('Erro ao processar candidatura:', error);
+    console.error('=== ERRO DURANTE O PROCESSAMENTO ===');
+    console.error('Tipo do erro:', error.constructor.name);
+    console.error('Mensagem:', error.message);
+    console.error('Stack:', error.stack);
+    
+    // Tratamento específico de erros
+    let errorMessage = 'Erro interno do servidor. Tente novamente mais tarde.';
+    
+    if (error.message.includes('authentication') || error.message.includes('Invalid login')) {
+      errorMessage = 'Erro de autenticação do email. Verifique as credenciais.';
+    } else if (error.message.includes('connection') || error.message.includes('ECONNREFUSED')) {
+      errorMessage = 'Erro de conexão. Verifique sua internet e tente novamente.';
+    } else if (error.message.includes('Tipo de arquivo')) {
+      errorMessage = error.message;
+    } else if (error.message.includes('File too large')) {
+      errorMessage = 'Arquivo muito grande. O tamanho máximo é 5MB.';
+    }
+    
     res.status(500).json({ 
-      error: 'Erro interno do servidor. Tente novamente mais tarde.' 
+      error: errorMessage,
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
   }
 }
