@@ -241,6 +241,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Submissão do formulário
+    // Dentro da função de submit do formulário, altere a URL:
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
         
