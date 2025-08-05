@@ -272,7 +272,7 @@ document.addEventListener('DOMContentLoaded', function() {
             formData.append('curriculo', curriculoInput.files[0]);
 
             // Enviar dados
-            const response = await fetch('/api/submit', {  // ← MUDANÇA AQUI
+            const response = await fetch('/api/submit', {
                 method: 'POST',
                 body: formData
             });
